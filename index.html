@@ -3,7 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Train Booking</title>
+    <title>Bou er Ticket By Ayshik Khan</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .content-box {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
     <script>
         function generateLinks() {
             const date = document.getElementById('date').value;
@@ -23,41 +39,51 @@
             const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
             const formattedDate = `${day}-${months[parseInt(month) - 1]}-${year}`;
 
-            const stations = ["Harashpur", "Montola", "Nayapara", "Shahaji_Bazar", "Saiestaganj", "Srimangal", "Bhanugach", "Kulaura", "Maijgaon", "Sylhet"];
+            const stations = ["Harashpur", "Montola", "Nayapara", "Shahaji_Bazar", "Shaistaganj", "Sreemangal", "Bhanugach", "Kulaura", "Maijgaon", "Sylhet"];
             stations.forEach(station => {
                 const url = `https://eticket.railway.gov.bd/booking/train/search?fromcity=Dhaka&tocity=${station}&doj=${formattedDate}&class=${className}`;
                 const link = document.createElement('a');
                 link.href = url;
                 link.target = '_blank';
+                link.classList.add('btn', 'btn-primary', 'btn-block', 'my-1');
                 link.textContent = `Open booking for ${station}`;
                 linkContainer.appendChild(link);
-                linkContainer.appendChild(document.createElement('br'));
             });
         }
     </script>
 </head>
 <body>
-    <h1>Train Booking</h1>
-    <label for="date">Select Date:</label>
-    <input type="date" id="date" name="date">
-    <br><br>
-    <label for="choose_class">Choose a Class:</label>
-    <select id="choose_class" name="choose_class">
-        <option value="">Choose a Class</option>
-        <option value="AC_B">AC_B</option>
-        <option value="AC_S">AC_S</option>
-        <option value="SNIGDHA">SNIGDHA</option>
-        <option value="F_BERTH">F_BERTH</option>
-        <option value="F_SEAT">F_SEAT</option>
-        <option value="F_CHAIR">F_CHAIR</option>
-        <option value="S_CHAIR">S_CHAIR</option>
-        <option value="SHOVAN">SHOVAN</option>
-        <option value="SHULOV">SHULOV</option>
-        <option value="AC_CHAIR">AC_CHAIR</option>
-    </select>
-    <br><br>
-    <button onclick="generateLinks()">Submit</button>
-    <br><br>
-    <div id="links"></div>
+    <div class="container">
+        <div class="content-box">
+            <h1 class="title">Bou er Ticket By Ayshik Khan</h1>
+            <div class="form-group">
+                <label for="date">Select Date:</label>
+                <input type="date" id="date" name="date" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="choose_class">Choose a Class:</label>
+                <select id="choose_class" name="choose_class" class="form-control">
+                    <option value="">Choose a Class</option>
+                    <option value="AC_B">AC_B</option>
+                    <option value="AC_S">AC_S</option>
+                    <option value="SNIGDHA">SNIGDHA</option>
+                    <option value="F_BERTH">F_BERTH</option>
+                    <option value="F_SEAT">F_SEAT</option>
+                    <option value="F_CHAIR">F_CHAIR</option>
+                    <option value="S_CHAIR">S_CHAIR</option>
+                    <option value="SHOVAN">SHOVAN</option>
+                    <option value="SHULOV">SHULOV</option>
+                    <option value="AC_CHAIR">AC_CHAIR</option>
+                </select>
+            </div>
+            <button class="btn btn-success btn-block" onclick="generateLinks()">Submit</button>
+            <br><br>
+            <div id="links"></div>
+        </div>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
