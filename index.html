@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Booking</title>
+    <script>
+        function generateLinks() {
+            const date = document.getElementById('date').value;
+            const className = document.getElementById('choose_class').value;
+            const linkContainer = document.getElementById('links');
+
+            // Clear any previous links
+            linkContainer.innerHTML = '';
+
+            if (!date || !className) {
+                alert('Please select both a date and a class.');
+                return;
+            }
+
+            // Convert date to the required format: 14-Jun-2024
+            const [year, month, day] = date.split('-');
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const formattedDate = `${day}-${months[parseInt(month) - 1]}-${year}`;
+
+            const stations = ["Harashpur", "Montola", "Nayapara", "Shahaji_Bazar", "Saiestaganj", "Srimangal", "Bhanugach", "Kulaura", "Maijgaon", "Sylhet"];
+            stations.forEach(station => {
+                const url = `https://eticket.railway.gov.bd/booking/train/search?fromcity=Dhaka&tocity=${station}&doj=${formattedDate}&class=${className}`;
+                const link = document.createElement('a');
+                link.href = url;
+                link.target = '_blank';
+                link.textContent = `Open booking for ${station}`;
+                linkContainer.appendChild(link);
+                linkContainer.appendChild(document.createElement('br'));
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Train Booking</h1>
+    <label for="date">Select Date:</label>
+    <input type="date" id="date" name="date">
+    <br><br>
+    <label for="choose_class">Choose a Class:</label>
+    <select id="choose_class" name="choose_class">
+        <option value="">Choose a Class</option>
+        <option value="AC_B">AC_B</option>
+        <option value="AC_S">AC_S</option>
+        <option value="SNIGDHA">SNIGDHA</option>
+        <option value="F_BERTH">F_BERTH</option>
+        <option value="F_SEAT">F_SEAT</option>
+        <option value="F_CHAIR">F_CHAIR</option>
+        <option value="S_CHAIR">S_CHAIR</option>
+        <option value="SHOVAN">SHOVAN</option>
+        <option value="SHULOV">SHULOV</option>
+        <option value="AC_CHAIR">AC_CHAIR</option>
+    </select>
+    <br><br>
+    <button onclick="generateLinks()">Submit</button>
+    <br><br>
+    <div id="links"></div>
+</body>
+</html>
